@@ -1,0 +1,5 @@
+apiManager/apiKeys.py
+/djangoenv
+.idea/
+*.sqlite3
+__pycache__
