@@ -26,7 +26,7 @@ class apiManager():
                 "slice":[{
                     "origin": "MSP",
                     "destination": "ABJ",
-                    "date": "2017-06-20"
+                    "date": "2017-08-20"
                 }]
             }
         }
@@ -35,9 +35,17 @@ class apiManager():
         response  = requests.post(url, data=json.dumps(body), headers=headers)
         data = response.json()
 
-        data_info = data['trips']['tripOption'][0]
+        data_info = data['trips']['tripOption']
 
-        pprint.pprint(data_info, indent=4)
+
+        prices = []
+
+        for trips in data_info[0:10]:
+
+            price = trips['pricing'][0]['baseFareTotal']
+            prices.append(price)
+
+        return prices
 
 
 if __name__ == "__main__":
@@ -45,4 +53,5 @@ if __name__ == "__main__":
     "For Testing Porpose Only"
 
     apiObject = apiManager()
-    apiObject.search()
+    prices = apiObject.search()
+    print(prices)
